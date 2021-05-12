@@ -1,5 +1,5 @@
 
 #!/bin/bash
-chmod a+x engines/stockfish_13_linux_x64_modern
+chmod a+x engines/stockfish_21051119_x64_ssse
 ls engines -l
 python lichess-bot.py
