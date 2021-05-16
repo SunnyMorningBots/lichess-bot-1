@@ -1,13 +1,13 @@
-token: "oH2aaoImIqHnChYl"    # lichess OAuth2 Token, with 'play as a bot' enabled 
+token: "YiczPryhtyQ4jd8B"    # lichess OAuth2 Token, with 'play as a bot' enabled 
 url: "https://lichess.org/"  # lichess base URL, do not change this
 
 engine:                      # engine settings
   dir: "./engines/"          # dir containing engines, relative to this project
-  name: "stockfish_21051119_x64_ssse"        # binary name of the engine, on windows don't forget the '.exe' extenstion
+  name: "stockfish"        # binary name of the engine, on windows don't forget the '.exe' extenstion
   protocol: "uci"            # "uci" or "xboard"
   uci_ponder: true           # think on opponent time; only works if "protocol" is "uci"
   polyglot:
-    enabled: false           # activate polyglot book
+    enabled: true            # activate polyglot book
     book:
       standard: # "engines/book.bin" # book file path of standard chess (must be in .bin format -> PolyGlot) EDIT: it's possible to use more than 1 book!
         - engines/book1.bin
@@ -20,13 +20,13 @@ engine:                      # engine settings
 #      kingofthehill: "kingOfTheHill book path"
 #      racingkings: "racingKings book path"
 #      3check: "threeCheck book path"
-      min_weight: 60          # selects move with highest weight but not below this value
+      min_weight: 30          # selects move with highest weight but not below this value
       selection: "best_move" # move slection is one of "weighted_random", "uniform_random" or "best_move" (but not below the min_weight in 2. and 3. case)
-    max_depth: 8             # half move max depth
+    max_depth: 3             # half move max depth
 # engine_options:            # any custom command line params to pass to the engine
 #   cpuct: 3.1
   uci_options:               # arbitrary UCI options passed to the engine
-    Move Overhead: 5000       # increase if your bot flags games too often
+    Move Overhead: 150       # increase if your bot flags games too often
     Ponder: true
     Threads: 4               # max CPU threads the engine can use
     Hash: 128                # max memory (in megabytes) the engine can allocate
@@ -46,12 +46,12 @@ engine:                      # engine settings
 
 abort_time: 20               # time to abort a game in seconds when there is no activity
 fake_think_time: false       # artificially slow down the bot to pretend like it's thinking
-move_overhead: 110           # increase if your bot flags games too often
+move_overhead: 150           # increase if your bot flags games too often
 
 challenge:                   # incoming challenges
-  concurrency: 1             # number of games to play simultaneously
+  concurrency: 5             # number of games to play simultaneously
   sort_by: "best"           # possible values: "best", "first"
-  accept_bot: false           # accepts challenges coming from other bots
+  accept_bot: true            # accepts challenges coming from other bots
   max_increment: 180         # maximum amount of increment to accaept a challenge. the max is 180. set to 0 for no increment
   min_increment: 0           # minimum amount of increment to accept a challenge
   variants:                  # chess variants to accept (http://lichess.org/variant)
@@ -69,10 +69,10 @@ challenge:                   # incoming challenges
     - bullet
     - blitz
     - rapid
-#   - classical
-#   - correspondence
+    - classical
+    - correspondence
   modes:                     # game modes to accept
-#   - casual                 # unrated games
+    - casual                 # unrated games
     - rated                  # rated games - must comment if the engine doesn't try to win
 
 # Notes:
